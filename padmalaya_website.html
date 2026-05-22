@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padmalaya Mallick — LBS</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sidebar-w: 250px;
+  --slate: #1B2535;
+  --slate-mid: #2C3A50;
+  --slate-border: rgba(255,255,255,0.08);
+  --accent: #C1704A;
+  --accent-hover: #D4845E;
+  --white: #FFFFFF;
+  --off: #F7F6F3;
+  --ink: #1C1917;
+  --mid: #57534E;
+  --muted: #A8A29E;
+  --rule: #E7E4DF;
+}
+
+html, body { height: 100%; }
+
+body {
+  display: flex;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--ink);
+  background: var(--white);
+}
+
+/* ── SIDEBAR ── */
+aside {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--slate);
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 2rem;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.monogram {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--slate-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.monogram span {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.sidebar-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.25rem;
+  color: #EAE6DF;
+  line-height: 1.25;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+}
+
+.sidebar-rule {
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  margin-bottom: 2.5rem;
+}
+
+nav { flex: 1; }
+
+nav ul { list-style: none; }
+
+nav ul li { margin-bottom: 0.2rem; }
+
+nav ul li a {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(234,230,223,0.55);
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.45rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 0.85rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+nav ul li a:hover {
+  color: #EAE6DF;
+}
+
+nav ul li a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.sidebar-footer p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(234,230,223,0.25);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+}
+
+/* ── MAIN CONTENT ── */
+main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+
+.page { display: none; padding: 4rem 4rem 5rem; max-width: 820px; }
+.page.active { display: block; animation: fadeIn 0.35s ease both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ABOUT ── */
+.about-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+.about-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.75rem;
+}
+
+.about-name em {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 2.4rem;
+  display: block;
+}
+
+.about-intro {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--mid);
+  max-width: 600px;
+  margin-bottom: 1.2rem;
+}
+
+.about-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--rule);
+  margin: 2.25rem 0;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  border: 1px solid var(--rule);
+  padding: 0.3rem 0.8rem;
+  background: var(--off);
+}
+
+.cta-row {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-solid {
+  background: var(--slate);
+  color: #EAE6DF;
+}
+.btn-solid:hover { background: var(--slate-mid); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--mid);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ── PAGE HEADERS ── */
+.ph {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ph-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.ph h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* ── RESEARCH ── */
+.research-lede {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--mid);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+}
+
+.area-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5px;
+  background: var(--rule);
+  margin-bottom: 3.5rem;
+}
+
+.area-card {
+  background: var(--white);
+  padding: 1.75rem;
+}
+
+.area-card-num {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.5rem;
+  color: var(--rule);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.area-card h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.area-card p {
+  font-size: 0.92rem;
+  color: var(--mid);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.pubs-h {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.pub {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 0 1.25rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+
+.pub:last-child { border-bottom: none; }
+
+.pub-yr {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  color: var(--accent);
+  padding-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.pub-t {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+  line-height: 1.4;
+}
+
+.pub-m {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── TEACHING ── */
+.teaching-lede {
+  font-size: 1rem;
+  color: var(--mid);
+  margin-bottom: 3rem;
+  max-width: 560px;
+}
+
+.t-section { margin-bottom: 2.5rem; }
+
+.t-section-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.t-section-head h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.t-section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.course {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--off);
+  align-items: start;
+}
+
+.course:last-child { border-bottom: none; }
+
+.course-n {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.course-d {
+  font-size: 0.88rem;
+  color: var(--mid);
+  grid-column: 1;
+}
+
+.course-c {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  padding-top: 4px;
+  grid-row: 1 / 3;
+  grid-column: 2;
+  white-space: nowrap;
+}
+
+/* ── CV ── */
+.cv-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2.5rem;
+}
+
+.cv-s { margin-bottom: 2.75rem; }
+
+.cv-s-head {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.cv-row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.15rem 1.5rem;
+  margin-bottom: 1.2rem;
+  align-items: start;
+}
+
+.cv-dates {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding-top: 3px;
+  letter-spacing: 0.02em;
+}
+
+.cv-role {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.cv-place {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.83rem;
+  color: var(--mid);
+  font-weight: 300;
+}
+
+/* ── CONTACT ── */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.contact-h {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+
+.cd { margin-bottom: 1.5rem; }
+
+.cd-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+
+.cd-val {
+  font-size: 0.95rem;
+  color: var(--mid);
+}
+
+.cd-val a { color: var(--accent); text-decoration: none; }
+.cd-val a:hover { text-decoration: underline; }
+
+.fg { margin-bottom: 1.25rem; }
+
+.fg label {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.fg input, .fg textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  padding: 0.5rem 0;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+
+.fg input:focus, .fg textarea:focus {
+  border-bottom-color: var(--accent);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  :root { --sidebar-w: 0px; }
+  aside {
+    position: static;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 1rem 1.5rem;
+    height: auto;
+    align-items: center;
+    gap: 1rem;
+  }
+  .monogram { margin-bottom: 0; }
+  .sidebar-name { font-size: 1rem; margin-bottom: 0; }
+  .sidebar-title, .sidebar-rule, .sidebar-footer { display: none; }
+  nav ul { display: flex; gap: 1.25rem; }
+  nav ul li a { padding: 0.3rem 0; padding-left: 0; border-left: none; border-bottom: 2px solid transparent; font-size: 0.72rem; }
+  nav ul li a.active { border-bottom-color: var(--accent); border-left: none; }
+  main { margin-left: 0; }
+  .page { padding: 2rem 1.5rem 3rem; }
+  .about-name { font-size: 2.2rem; }
+  .area-grid { grid-template-columns: 1fr; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .cv-row { grid-template-columns: 1fr; gap: 0; }
+  body { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="monogram"><span>PM</span></div>
+  <div class="sidebar-name">Padmalaya<br>Mallick</div>
+  <div class="sidebar-title">PhD Candidate<br>Strategy &amp; Entrepreneurship<br>London Business School</div>
+  <div class="sidebar-rule"></div>
+  <nav>
+    <ul>
+      <li><a onclick="go('about')" id="nav-about" class="active">About</a></li>
+      <li><a onclick="go('research')" id="nav-research">Research</a></li>
+      <li><a onclick="go('teaching')" id="nav-teaching">Teaching</a></li>
+      <li><a onclick="go('cv')" id="nav-cv">CV</a></li>
+      <li><a onclick="go('contact')" id="nav-contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="sidebar-footer">
+    <p>London Business School<br>Regent's Park<br>London, NW1 4SA</p>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+<!-- ── ABOUT ── -->
+<div class="page active" id="page-about">
+  <div class="about-eyebrow">PhD Candidate · London Business School</div>
+  <h1 class="about-name">
+    Padmalaya<br>Mallick
+    <em>Strategy &amp; Entrepreneurship</em>
+  </h1>
+
+  <p class="about-intro">
+    I am a PhD Candidate in Strategy and Entrepreneurship at London Business School, developing research on the organizational antecedents and consequences of stakeholder polarization — with particular attention to organizational narratives, rhetorical history, and temporal perceptions.
+  </p>
+  <p class="about-intro">
+    My dissertation is supervised by Professor Dónal Crilly. Before joining LBS, I worked as a Research Associate in Strategy and Innovation at the Indian School of Business, and prior to academia I spent six years as a Business Consultant at Deloitte and as a Systems Engineer at Infosys.
+  </p>
+
+  <div class="about-divider"></div>
+
+  <div class="tag-row">
+    <span class="tag">Stakeholder Theory</span>
+    <span class="tag">Organizational Narratives</span>
+    <span class="tag">Rhetorical History</span>
+    <span class="tag">Polarization</span>
+    <span class="tag">Strategy</span>
+    <span class="tag">Entrepreneurship</span>
+  </div>
+
+  <div class="cta-row">
+    <button class="btn btn-solid" onclick="go('cv')">Download CV</button>
+    <button class="btn btn-ghost" onclick="go('research')">View Research</button>
+    <button class="btn btn-ghost" onclick="go('contact')">Get in Touch</button>
+  </div>
+</div>
+
+<!-- ── RESEARCH ── -->
+<div class="page" id="page-research">
+  <div class="ph">
+    <div class="ph-label">Scholarship</div>
+    <h1>Research</h1>
+  </div>
+
+  <p class="research-lede">
+    My work examines how organizational narratives and rhetorical history shape stakeholder polarization and how firms navigate the temporal and relational consequences that follow.
+  </p>
+
+  <div class="area-grid">
+    <div class="area-card">
+      <div class="area-card-num">01</div>
+      <h3>Stakeholder Polarization</h3>
+      <p>Examining the organizational antecedents and consequences of polarization among stakeholder groups, with attention to how firms respond to increasingly divided audiences.</p>
+    </div>
+    <div class="area-card">
+      <div class="area-card-num">02</div>
+      <h3>Organizational Narratives</h3>
+      <p>Studying how firms construct, deploy, and revise narratives to manage legitimacy, align stakeholders, and shape interpretations of organizational action over time.</p>
+    </div>
+    <div class="area-card">
+      <div class="area-card-num">03</div>
+      <h3>Rhetorical History</h3>
+      <p>Investigating how organizations strategically use and reinterpret their own histories as a resource for competitive advantage and stakeholder engagement.</p>
+    </div>
+    <div class="area-card">
+      <div class="area-card-num">04</div>
+      <h3>Temporal Perceptions</h3>
+      <p>Exploring how actors' orientations toward the past, present, and future influence strategic decision-making and stakeholder relations within organizations.</p>
+    </div>
+  </div>
+
+  <div class="pubs-h">Selected Publications &amp; Working Papers</div>
+
+  <div class="pub">
+    <div class="pub-yr">2024</div>
+    <div>
+      <div class="pub-t">"Title of Your Most Recent Article"</div>
+      <div class="pub-m">Journal Name, vol. 00, no. 0, pp. 000–000</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="pub-yr">2023</div>
+    <div>
+      <div class="pub-t">"Title of Working Paper or Conference Paper"</div>
+      <div class="pub-m">Under review · Journal Name</div>
+    </div>
+  </div>
+  <div class="pub">
+    <div class="pub-yr">2022</div>
+    <div>
+      <div class="pub-t">"Title of Earlier Publication"</div>
+      <div class="pub-m">Journal Name, vol. 00, no. 0, pp. 000–000</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TEACHING ── -->
+<div class="page" id="page-teaching">
+  <div class="ph">
+    <div class="ph-label">Pedagogy</div>
+    <h1>Teaching</h1>
+  </div>
+
+  <p class="teaching-lede">
+    I teach at undergraduate and postgraduate levels, with an emphasis on strategy, organizational theory, and research methods. I welcome enquiries from prospective doctoral students working on stakeholder theory, narrative strategy, and related topics.
+  </p>
+
+  <div class="t-section">
+    <div class="t-section-head"><h3>Undergraduate</h3></div>
+    <div class="course">
+      <div class="course-n">Introduction to Strategy</div>
+      <div class="course-c">DEPT 1001</div>
+      <div class="course-d">Foundational concepts in competitive strategy, firm performance, and industry analysis.</div>
+    </div>
+    <div class="course">
+      <div class="course-n">Organisations &amp; Management</div>
+      <div class="course-c">DEPT 2045</div>
+      <div class="course-d">Examines how organizations structure decisions, culture, and stakeholder relationships.</div>
+    </div>
+  </div>
+
+  <div class="t-section">
+    <div class="t-section-head"><h3>Postgraduate</h3></div>
+    <div class="course">
+      <div class="course-n">Strategic Management</div>
+      <div class="course-c">DEPT 5001</div>
+      <div class="course-d">Core MBA course covering competitive dynamics, corporate strategy, and stakeholder management.</div>
+    </div>
+    <div class="course">
+      <div class="course-n">Qualitative Research Methods</div>
+      <div class="course-c">DEPT 5110</div>
+      <div class="course-d">Covers case study design, archival methods, interviews, and research ethics.</div>
+    </div>
+  </div>
+
+  <div class="t-section">
+    <div class="t-section-head"><h3>Doctoral Supervision</h3></div>
+    <div class="course">
+      <div class="course-n">Current doctoral students</div>
+      <div class="course-d">Add current PhD students, their thesis topics, and start years here.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CV ── -->
+<div class="page" id="page-cv">
+  <div class="ph">
+    <div class="ph-label">Academic Record</div>
+    <h1>Curriculum Vitae</h1>
+  </div>
+
+  <div class="cv-top">
+    <button class="btn btn-solid">Download Full CV (PDF)</button>
+  </div>
+
+  <div class="cv-s">
+    <div class="cv-s-head">Education</div>
+    <div class="cv-row">
+      <div class="cv-dates">In progress</div>
+      <div>
+        <div class="cv-role">PhD, Strategy &amp; Entrepreneurship</div>
+        <div class="cv-place">London Business School · Supervisor: Prof. Dónal Crilly</div>
+      </div>
+    </div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year]</div>
+      <div>
+        <div class="cv-role">MBA</div>
+        <div class="cv-place">Xavier University</div>
+      </div>
+    </div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year]</div>
+      <div>
+        <div class="cv-role">Bachelor of Engineering, Computer Science</div>
+        <div class="cv-place">Biju Patnaik University of Technology (BPUT)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-s">
+    <div class="cv-s-head">Academic Positions</div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year]–</div>
+      <div>
+        <div class="cv-role">PhD Candidate</div>
+        <div class="cv-place">London Business School</div>
+      </div>
+    </div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year–Year]</div>
+      <div>
+        <div class="cv-role">Research Associate, Strategy &amp; Innovation</div>
+        <div class="cv-place">Indian School of Business</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-s">
+    <div class="cv-s-head">Industry Experience</div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year–Year]</div>
+      <div>
+        <div class="cv-role">Business Consultant</div>
+        <div class="cv-place">Deloitte</div>
+      </div>
+    </div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year–Year]</div>
+      <div>
+        <div class="cv-role">Systems Engineer</div>
+        <div class="cv-place">Infosys</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-s">
+    <div class="cv-s-head">Grants &amp; Fellowships</div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year–Year]</div>
+      <div>
+        <div class="cv-role">[Fellowship or Grant Title]</div>
+        <div class="cv-place">[Funding Body]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-s">
+    <div class="cv-s-head">Selected Service</div>
+    <div class="cv-row">
+      <div class="cv-dates">[Year]–</div>
+      <div>
+        <div class="cv-role">Reviewer</div>
+        <div class="cv-place">[Journal / Conference Names]</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<div class="page" id="page-contact">
+  <div class="ph">
+    <div class="ph-label">Get in Touch</div>
+    <h1>Contact</h1>
+  </div>
+
+  <div class="contact-wrap">
+    <div>
+      <div class="contact-h">Contact Details</div>
+
+      <div class="cd">
+        <div class="cd-label">Email</div>
+        <div class="cd-val"><a href="mailto:pmallick@london.edu">pmallick@london.edu</a></div>
+      </div>
+
+      <div class="cd">
+        <div class="cd-label">Institution</div>
+        <div class="cd-val">London Business School<br>Regent's Park<br>London, NW1 4SA<br>United Kingdom</div>
+      </div>
+
+      <div class="cd">
+        <div class="cd-label">Office Hours</div>
+        <div class="cd-val">By appointment</div>
+      </div>
+
+      <div class="cd">
+        <div class="cd-label">Profiles</div>
+        <div class="cd-val">
+          <a href="#">LBS Profile</a> &nbsp;·&nbsp;
+          <a href="#">Google Scholar</a> &nbsp;·&nbsp;
+          <a href="#">ORCID</a> &nbsp;·&nbsp;
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-h">Send a Message</div>
+
+      <div class="fg">
+        <label>Name</label>
+        <input type="text" placeholder="Your full name">
+      </div>
+      <div class="fg">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="fg">
+        <label>Subject</label>
+        <input type="text" placeholder="Brief subject line">
+      </div>
+      <div class="fg">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Your message…"></textarea>
+      </div>
+      <button class="btn btn-solid" style="margin-top: 0.5rem;">Send Message</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
